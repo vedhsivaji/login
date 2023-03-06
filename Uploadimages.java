@@ -5,7 +5,45 @@ import java.util.stream.Collectors;
 import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
+/*
 
+  CREATE TABLE form_data (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL
+);
+
+CREATE TABLE image_data (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    form_id INT NOT NULL,
+    file_name VARCHAR(255) NOT NULL,
+    FOREIGN KEY (form_id) REFERENCES form_data(id)
+);
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ <html>
+<head>
+    <title>Upload Images</title>
+</head>
+<body>
+    <h1>Upload Images</h1>
+    <form action="Uploadimages" method="post" enctype="multipart/form-data">
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title" required><br><br>
+        
+        <label for="description">Description:</label>
+        <textarea name="description" id="description" required></textarea><br><br>
+        
+        <label for="images">Images:</label>
+        <input type="file" name="images" id="images" multiple required><br><br>
+        
+        <input type="submit" value="Upload">
+    </form>
+</body>
+</html>
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+ 
+*/
 @WebServlet(name = "Uploadimages", urlPatterns = { "/Uploadimages" })
 @MultipartConfig
 public class Uploadimages extends HttpServlet {
