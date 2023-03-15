@@ -19,6 +19,23 @@ public class HomeController {
 }
 
 /*
+
+dependancies
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.6.3</version>
+</parent>
+
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+</dependencies>
+
+
+
   welcomeHome.html
  <!DOCTYPE html>
 <html>
