@@ -34,7 +34,10 @@ dependancies
     </dependency>
 </dependencies>
 
-
+<dependency>
+		   <groupId>org.springframework.boot</groupId>
+		   <artifactId>spring-boot-starter-thymeleaf</artifactId>
+</dependency>
 
   welcomeHome.html
  <!DOCTYPE html>
