@@ -27,3 +27,45 @@
 .menu-container:hover ul {
   display: block;
 }
+
+
+
+
+
+
+.menu-container {
+  position: relative;
+}
+
+.menu-container span {
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.menu-container ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 999;
+  display: none;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.menu-container ul li {
+  display: block;
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+.menu-container ul li:hover {
+  background-color: #f2f2f2;
+}
+
+.menu-container:hover ul {
+  display: block;
+}
