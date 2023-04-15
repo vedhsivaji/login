@@ -1,0 +1,29 @@
+.menu-container {
+  position: relative;
+}
+
+.menu-container span {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.menu-container ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 999;
+  display: none;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.menu-container ul li {
+  display: block;
+}
+
+.menu-container:hover ul {
+  display: block;
+}
