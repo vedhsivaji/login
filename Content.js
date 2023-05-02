@@ -79,3 +79,73 @@ const CourseContent = () => {
 };
 
 export default CourseContent;
+
+
+import React, { useState } from 'react';
+import { Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
+
+const CourseContent = () => {
+  const [selectedVideo, setSelectedVideo] = useState(null);
+
+  const handleVideoSelection = (video) => {
+    setSelectedVideo(video);
+  };
+
+  const sections = [
+    {
+      id: 1,
+      title: 'Section 1',
+      videos: [
+        { id: 1, title: 'Video 1.1' },
+        { id: 2, title: 'Video 1.2' },
+        { id: 3, title: 'Video 1.3' },
+      ],
+    },
+    {
+      id: 2,
+      title: 'Section 2',
+      videos: [
+        { id: 4, title: 'Video 2.1' },
+        { id: 5, title: 'Video 2.2' },
+      ],
+    },
+  ];
+
+  return (
+    <Container>
+      <Row>
+        <Col md={8}>
+          <h1>Course Content</h1>
+          {sections.map((section) => (
+            <div key={section.id}>
+              <h3>{section.title}</h3>
+              <ListGroup>
+                {section.videos.map((video) => (
+                  <ListGroupItem
+                    key={video.id}
+                    onClick={() => handleVideoSelection(video)}
+                  >
+                    <input type="checkbox" checked disabled />
+                    {video.title}
+                  </ListGroupItem>
+                ))}
+              </ListGroup>
+            </div>
+          ))}
+        </Col>
+        <Col md={4}>
+          {selectedVideo ? (
+            <video controls>
+              <source src="dummy-link.mp4" type="video/mp4" />
+            </video>
+          ) : (
+            <div>No video selected</div>
+          )}
+        </Col>
+      </Row>
+    </Container>
+  );
+};
+
+export default CourseContent;
+
