@@ -149,3 +149,107 @@ const CourseContent = () => {
 
 export default CourseContent;
 
+
+
+
+
+import React, { useState } from "react";
+import { Container, Row, Col, ListGroup, Form } from "react-bootstrap";
+
+const VideoSection = () => {
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [videoProgress, setVideoProgress] = useState({});
+
+  const sections = [
+    {
+      id: 1,
+      title: "Introduction",
+      videos: [
+        {
+          id: 1,
+          title: "Welcome to the course",
+          duration: "4:21",
+        },
+        {
+          id: 2,
+          title: "What you will learn",
+          duration: "2:33",
+        },
+      ],
+    },
+    {
+      id: 2,
+      title: "Getting started",
+      videos: [
+        {
+          id: 3,
+          title: "Setting up your environment",
+          duration: "6:02",
+        },
+        {
+          id: 4,
+          title: "Creating your first project",
+          duration: "9:17",
+        },
+      ],
+    },
+  ];
+
+  const handleVideoClick = (videoId) => {
+    setSelectedVideo(videoId);
+    setVideoProgress((prev) => ({ ...prev, [videoId]: true }));
+  };
+
+  const getVideoLink = (videoId) => {
+    // TODO: Replace with backend API call to get video link
+    return "https://dummyvideo.com/" + videoId;
+  };
+
+  return (
+    <Container>
+      <Row>
+        <Col md={3}>
+          <ListGroup>
+            {sections.map((section) => (
+              <ListGroup.Item key={section.id}>
+                <h5>{section.title}</h5>
+                <ListGroup variant="flush">
+                  {section.videos.map((video) => (
+                    <ListGroup.Item
+                      key={video.id}
+                      action
+                      onClick={() => handleVideoClick(video.id)}
+                      active={selectedVideo === video.id}
+                      disabled={!videoProgress[video.id]}
+                    >
+                      <Form.Check
+                        type="checkbox"
+                        label={video.title}
+                        checked={videoProgress[video.id]}
+                        readOnly
+                      />
+                      <span className="float-right">{video.duration}</span>
+                    </ListGroup.Item>
+                  ))}
+                </ListGroup>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </Col>
+        <Col md={9}>
+          <div className="embed-responsive embed-responsive-16by9">
+            <iframe
+              title="Video player"
+              className="embed-responsive-item"
+              src={getVideoLink(selectedVideo)}
+              allowFullScreen
+            ></iframe>
+          </div>
+        </Col>
+      </Row>
+    </Container>
+  );
+};
+
+export default VideoSection;
+
