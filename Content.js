@@ -253,3 +253,94 @@ const VideoSection = () => {
 
 export default VideoSection;
 
+
+
+import React, { useState } from 'react';
+import { Accordion, Card, Button } from 'react-bootstrap';
+
+function CourseContent () {
+  const [currentVideo, setCurrentVideo] = useState(null);
+  const [completedVideos, setCompletedVideos] = useState([]);
+
+  const handleVideoClick = (video) => {
+    setCurrentVideo(video);
+    if (!completedVideos.includes(video)) {
+      setCompletedVideos([...completedVideos, video]);
+      // Call backend API to mark the video as completed
+    }
+  };
+
+  const sections = [    {      title: 'Section 1',      videos: [        { title: 'Video 1.1', url: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },        { title: 'Video 1.2', url: 'https://www.youtube.com/embed/2ZIpFytCSVc' },        { title: 'Video 1.3', url: 'https://www.youtube.com/embed/_OBlgSz8sSM' },      ],
+    },
+    {
+      title: 'Section 2',
+      videos: [
+        { title: 'Video 2.1', url: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
+        { title: 'Video 2.2', url: 'https://www.youtube.com/embed/2ZIpFytCSVc' },
+        { title: 'Video 2.3', url: 'https://www.youtube.com/embed/_OBlgSz8sSM' },
+      ],
+    },
+    {
+      title: 'Section 3',
+      videos: [
+        { title: 'Video 3.1', url: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
+        { title: 'Video 3.2', url: 'https://www.youtube.com/embed/2ZIpFytCSVc' },
+        { title: 'Video 3.3', url: 'https://www.youtube.com/embed/_OBlgSz8sSM' },
+      ],
+    },
+  ];
+
+  return (
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-lg-3 col-md-4 col-sm-12">
+          <Accordion defaultActiveKey={sections[0].title}>
+            {sections.map((section, index) => (
+              <Card key={index}>
+                <Card.Header>
+                  <Accordion.Toggle as={Button} variant="link" eventKey={section.title}>
+                    {section.title}
+                  </Accordion.Toggle>
+                </Card.Header>
+                <Accordion.Collapse eventKey={section.title}>
+                  <Card.Body>
+                    <div style={{ maxHeight: '500px', overflowY: 'scroll' }}>
+                      {section.videos.map((video, index) => (
+                        <div key={index} className="d-flex align-items-center mt-2">
+                          <input type="checkbox" checked={completedVideos.includes(video)} readOnly />
+                          <div
+                            className="ml-2"
+                            style={{ cursor: 'pointer' }}
+                            onClick={() => handleVideoClick(video)}
+                          >
+                            {video.title}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            ))}
+          </Accordion>
+        </div>
+        <div className="col-lg-9 col-md-8 col-sm-12">
+          <div className="embed-responsive embed-responsive-16by9">
+          {currentVideo ? (
+              <iframe className="embed-responsive-item" src={currentVideo.url} allowFullScreen />
+            ) : (
+              <div className="text-center mt-5">
+                <i className="far fa-play-circle fa-5x" />
+                <div className="mt-2">Select a video to start</div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CourseContent;
+
+
