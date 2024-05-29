@@ -256,3 +256,57 @@ function CheckboxList() {
 
 export default CheckboxList;
 
+/*
+<%
+    List<Client> insertClientList = NewMSRFormBean.getInsertClientList();
+    StringBuilder jsonBuilder = new StringBuilder();
+    jsonBuilder.append("[");
+    for (Iterator<Client> iterator = insertClientList.iterator(); iterator.hasNext(); ) {
+        Client client = iterator.next();
+        jsonBuilder.append("{\"InsertClientId\":\"").append(client.getInsertClientId()).append("\"}");
+        if (iterator.hasNext()) {
+            jsonBuilder.append(",");
+        }
+    }
+    jsonBuilder.append("]");
+%>
+<input type="hidden" id="insertClientData" value='<%= jsonBuilder.toString() %>' />
+document.addEventListener("DOMContentLoaded", function() {
+    function insertClient(client) {
+        var isMatch = false;
+        var select = document.getElementById('SelectedInsertId');
+
+        if (select.length > 0) {
+            if (select.options[select.length - 1].value === '11') {
+                select.remove(select.length - 1);
+            }
+
+            // Get the data from the hidden input field
+            var hiddenInput = document.getElementById('insertClientData');
+            var insertClientData = JSON.parse(hiddenInput.value);
+
+            // Iterate over the insertClientData array
+            insertClientData.forEach(item => {
+                if (item.InsertClientId === client) {
+                    isMatch = true;
+                }
+            });
+
+            if (isMatch) {
+                var opt = document.createElement('option');
+                opt.value = 11;
+                opt.innerHTML = 11;
+                select.appendChild(opt);
+            }
+        }
+    }
+
+    // Example of how to call insertClient (you need to replace this with actual usage)
+    var client = document.querySelector("#ddlClientID option:checked").value;
+    insertClient(client);
+});
+<%-- Assuming you have access to the InsertClientList in your JSP --%>
+<input type="hidden" id="insertClientData" value='<%= new com.google.gson.Gson().toJson(NewMSRFormBean.getInsertClientList()) %>' />
+
+
+*/
